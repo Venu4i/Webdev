@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../../src/ecell.jpeg'
+import logo from '../../../src/ecell.jpeg';
 
 function Grid() {
   const [colors, setColors] = useState({
@@ -7,15 +7,15 @@ function Grid() {
     box2: 'blue',
     box3: 'blue',
   });
-  const [subBoxColors, setSubBoxColors] = useState(
-    Array(9).fill('blue')
-  );
+  const [subBoxColors, setSubBoxColors] = useState(Array(9).fill('blue'));
+
   const containerStyle = {
     display: 'flex',
     gap: '20px',
     justifyContent: 'center',
     alignItems: 'center',
     height: '100vh',
+    flexWrap: 'wrap', // This allows the boxes to wrap on smaller screens
   };
 
   const boxStyle = {
@@ -23,17 +23,20 @@ function Grid() {
     height: '200px',
     border: '2px solid #ccc',
     cursor: 'pointer',
+    flex: '1 1 200px', // This allows the boxes to grow and shrink
+    minWidth: '150px', // Minimum size for the boxes
+    boxSizing: 'border-box', // Ensures padding and borders don't affect width
   };
 
   const box1Style = {
     ...boxStyle,
     background: 'linear-gradient(to right, rgb(179, 132, 197), rgb(71, 18, 94))',
-    backgroundColor: colors.box1, 
+    backgroundColor: colors.box1,
   };
 
   const box2Style = {
     ...boxStyle,
-    background:   `url(${logo}) no-repeat center center` ,
+    background: `url(${logo}) no-repeat center center`,
     backgroundSize: 'cover',
   };
 
@@ -51,29 +54,33 @@ function Grid() {
     height: '100%',
     cursor: 'pointer',
     border: '2px solid #2980b9',
-    boxSizing: 'border-box', 
+    boxSizing: 'border-box',
   };
-
 
   const toggleSubBoxColor = (index) => {
     setSubBoxColors((prevColors) =>
-      prevColors.map((color, i) =>
-        i === index ? (color === 'blue' ? 'red' : 'blue') : color
-      )
+      prevColors.map((color, i) => (i === index ? (color === 'blue' ? 'red' : 'blue') : color))
     );
+  };
+
+  const toggleBoxColor = (box) => {
+    setColors((prevColors) => ({
+      ...prevColors,
+      [box]: prevColors[box] === 'blue' ? 'red' : 'blue',
+    }));
   };
 
   return (
     <div style={containerStyle}>
-      <div style={box1Style} onClick={() => setColors({ ...colors, box1: colors.box1 === 'blue' ? 'red' : 'blue' })}></div>
-      <div style={box2Style} onClick={() => setColors({ ...colors, box2: colors.box2 === 'blue' ? 'red' : 'blue' })}></div>
+      <div style={box1Style} onClick={() => toggleBoxColor('box1')}></div>
+      <div style={box2Style} onClick={() => toggleBoxColor('box2')}></div>
       <div style={box3Style}>
         {subBoxColors.map((color, index) => (
           <div
             key={index}
             style={{
               ...subBoxStyle,
-              backgroundColor: color, 
+              backgroundColor: color,
             }}
             onClick={() => toggleSubBoxColor(index)}
           ></div>
