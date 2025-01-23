@@ -21,7 +21,7 @@ function Grid() {
   const boxStyle = {
     width: '200px',
     height: '200px',
-    border: '2px solid #ccc',
+    border: '7px solid #ccc',
     cursor: 'pointer',
     flex: '1 1 200px', // This allows the boxes to grow and shrink
     minWidth: '150px', // Minimum size for the boxes
