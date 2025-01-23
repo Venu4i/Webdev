@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         element: <Home />, // Define routes within Layout
       },
       {
-        path: "grid",
+        path: "/",
         element: <Grid />,
       },
       {

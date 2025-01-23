@@ -23,7 +23,7 @@ function Home(){
                     <button  className={`mt-4 px-6 py-2 rounded-lg transition ${
                 clicked ? 'bg-gray-500 text-white' : 'bg-blue-500 text-white hover:bg-blue-600'
               }`}
-     onClick={Click} >My insta</button>
+     onClick={Click} >My instagram  </button >
                 
                     </div>
               <div>
